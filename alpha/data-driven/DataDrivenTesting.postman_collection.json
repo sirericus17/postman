@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "e0037d0f-6886-4b29-95c1-82fe423d16fe",
+		"name": "DataDrivenTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22510111"
+	},
+	"item": [
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Check status code\"] = responseCode.code == 200;\r",
+							"\r",
+							"tests[\"Check if status is persent\"] = responseBody.has(\"success\")\r",
+							"\r",
+							"var response = JSON.parse(responseBody);\r",
+							"tests[\"Check status in the response\"] = response.status == \"success\"\r",
+							"\r",
+							"pm.test(\"check Content-Type Header\", function()\r",
+							"{\r",
+							"    pm.response.to.be.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"salary\": \"{{salary}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
